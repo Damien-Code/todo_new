@@ -69,9 +69,10 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy(Todo $todo, Request $request)
     {
-        //
+        $todo->delete();
+        return redirect(route('category.show', $request->get('category_id', $request->user()->id)));
     }
 
     public function updateTodo(Request $request, Todo $todo)

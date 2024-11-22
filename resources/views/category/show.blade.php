@@ -14,14 +14,30 @@
     </div>
     <div class="flex justify-center items-center flex-col p-24">
         @foreach($todos as $todo)
-            <p>{{$todo->task}}</p>
-            <form method="post" action="{{route('todo.updateTodo', $todo->id)}}">
-                @method('PUT')
-                @csrf
-                <input type="checkbox" name="completed"
-                       onclick="event.preventDefault(); this.closest('form').submit();"
-                       @if($todo->completed) checked @endif value="{{old('completed', $todo->completed)}}">
-            </form>
+            <div class="flex justify-between w-96 h-16">
+                <form method="post" action="{{route('todo.updateTodo', $todo->id)}}">
+                    @method('PUT')
+                    @csrf
+                    <input type="checkbox" name="completed"
+                           onclick="event.preventDefault(); this.closest('form').submit();"
+                           @if($todo->completed) checked @endif value="{{old('completed', $todo->completed)}}">
+                </form>
+                <div class="flex justify-evenly w-36">
+                    <p class="text-xl text-left">{{$todo->task}}</p>
+                    <form method="post" action="{{route('todo.destroy', $todo->id)}}">
+                        @csrf
+                        @method('DELETE')
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                     width="24px"
+                                     fill="black">
+                                    <path
+                                        d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                                </svg>
+                            </button>
+                    </form>
+                </div>
+            </div>
         @endforeach
 
         <a href="{{route('category.index')}}" class="pt-10">
