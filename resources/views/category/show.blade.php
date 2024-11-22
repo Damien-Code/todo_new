@@ -14,7 +14,7 @@
     </div>
     <div class="flex justify-center items-center flex-col p-24">
         @foreach($todos as $todo)
-            <div class="flex justify-between w-96 h-16">
+            <div class="flex justify-between items-center w-96 h-16 p-4 mb-6 border-solid border-2 border-gray-400">
                 <form method="post" action="{{route('todo.updateTodo', $todo->id)}}">
                     @method('PUT')
                     @csrf
@@ -27,6 +27,7 @@
                     <form method="post" action="{{route('todo.destroy', $todo->id)}}">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="category_id" value="{{ $category->id }}">
                             <button>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                      width="24px"

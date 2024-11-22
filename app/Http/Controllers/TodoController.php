@@ -72,7 +72,7 @@ class TodoController extends Controller
     public function destroy(Todo $todo, Request $request)
     {
         $todo->delete();
-        return redirect(route('category.show', $request->get('category_id', $request->user()->id)));
+        return redirect(route('category.show', $request->get('category_id')));
     }
 
     public function updateTodo(Request $request, Todo $todo)
