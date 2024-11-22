@@ -37,7 +37,7 @@ class TodoController extends Controller
             'user_id' => $request->user()->id,
             'category_id' => $request->get('category_id'),
             'task' => $request->get('task'),
-            'completed' => $request->get('completed')
+            'completed' => $request->has('completed')
         ]);
         return redirect(route('category.show', $request->get('category_id')));
     }
