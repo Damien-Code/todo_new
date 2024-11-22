@@ -4,6 +4,7 @@
         <p class="text-2xl">Hello, {{Auth::user()->name}}</p>
         <form method="post" action="{{route('category.store')}}">
             @csrf
+            <input type="color" id="color" name="color">
             <input type="text" id="category" name="category" placeholder="Category">
             <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</button>
         </form>
@@ -11,7 +12,7 @@
 
     <div class="h-full w-screen grid grid-cols-3 justify-items-center gap-10">
         @foreach($categories as $category)
-            <div class=" flex w-96 h-48 p-12 bg-blue-200 rounded-lg text-center flex-col justify-between">
+            <div class=" flex w-96 h-48 p-12 bg-[{{ $category->color }}] rounded-lg text-center flex-col justify-between">
                 <p class="text-4xl">{{$category->category}}</p>
                 <div class="flex justify-between p-12">
                     <a href="{{route('category.show', $category->id)}}">

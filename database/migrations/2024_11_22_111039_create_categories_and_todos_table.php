@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category');
+            $table->string('color');
             $table->timestamps();
         });
         Schema::create('todos', function (Blueprint $table) {
