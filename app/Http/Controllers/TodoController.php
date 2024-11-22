@@ -13,15 +13,15 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::all();
-        return view('category.index', compact('todos'));
+        return view('category.show', compact($todos));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('todo.create');
+        return view('todo.create', ['category' => $request->get('category')]);
     }
 
     /**
@@ -30,13 +30,14 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'task' => $request->get('task'),
+            'task' => 'required|max:48',
         ]);
         Todo::create([
+            'user_id' => $request->user()->id,
             'category_id' => $request->get('category_id'),
             'task' => $request->get('task'),
         ]);
-        return redirect(route('category.show'));
+        return redirect(route('category.show', $request->get('category_id')));
     }
 
     /**

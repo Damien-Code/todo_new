@@ -41,7 +41,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('category.show', compact('category'));
+        $todos = $category->todos()->get();
+        return view('category.show', ['todos' => $todos, 'category' => $category]);
     }
 
     /**

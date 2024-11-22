@@ -16,6 +16,13 @@ return new class extends Migration
             $table->string('category');
             $table->timestamps();
         });
+        Schema::create('todos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->string('task');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('categories');
+        Schema::dropIfExists('todos');
     }
 };
