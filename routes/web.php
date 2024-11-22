@@ -27,4 +27,7 @@ Route::resource('todo', TodoController::class)
     ->only(['index', 'store', 'show', 'update', 'destroy', 'create'])
     ->middleware(['auth', 'verified']);
 
+Route::put('/todo/{todo}', [TodoController::class, 'updateTodo'])->name('todo.updateTodo')
+    ->middleware(['auth', 'verified']);
+
 require __DIR__.'/auth.php';

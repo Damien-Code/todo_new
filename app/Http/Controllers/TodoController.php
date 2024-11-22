@@ -31,11 +31,13 @@ class TodoController extends Controller
     {
         $validatedData = $request->validate([
             'task' => 'required|max:48',
+            'completed' => 'boolean',
         ]);
         Todo::create([
             'user_id' => $request->user()->id,
             'category_id' => $request->get('category_id'),
             'task' => $request->get('task'),
+            'completed' => $request->get('completed')
         ]);
         return redirect(route('category.show', $request->get('category_id')));
     }
@@ -70,5 +72,13 @@ class TodoController extends Controller
     public function destroy(Todo $todo)
     {
         //
+    }
+
+    public function updateTodo(Request $request, Todo $todo)
+    {
+        $todo->update([
+            'completed' => $request->has('completed'),
+        ]);
+        return redirect()->back();
     }
 }
