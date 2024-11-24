@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-    <div class="flex justify-between px-20 py-6">
+    <div class="flex justify-between px-20 py-6 ">
         <p class="text-2xl">Hello, {{Auth::user()->name}}</p>
         <form method="post" action="{{route('category.store')}}">
             @csrf
