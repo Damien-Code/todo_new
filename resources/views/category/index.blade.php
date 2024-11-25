@@ -12,7 +12,7 @@
 
     <div class="h-full w-screen grid grid-cols-3 justify-items-center gap-10">
         @foreach($categories as $category)
-            <div class=" flex w-96 h-48 p-12 bg-[{{ $category->color }}] rounded-lg text-center flex-col justify-between">
+            <div class=" flex w-96 h-48 p-12 rounded-lg text-center flex-col justify-between" style="background-color: {{$category->color}};">
                 <p class="text-4xl">{{$category->category}}</p>
                 <div class="flex justify-between p-12">
                     <a href="{{route('category.show', $category->id)}}">
