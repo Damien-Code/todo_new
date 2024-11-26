@@ -12,7 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $userid = auth()->id();
+        $categories = Category::where('user_id', $userid)->get();
+//        $categories = auth()->user()->categories()->get();
         return view('category.index', compact('categories'));
     }
 
@@ -33,7 +35,11 @@ class CategoryController extends Controller
             'category' => 'required|max:48',
             'color' => 'required'
         ]);
-        Category::create($validatedData);
+        Category::create([
+            'user_id' => auth()->id(),
+            'category' => $request->get('category'),
+            'color' => $request->get('color')
+        ]);
         return redirect(route('category.index'));
     }
 
