@@ -73,6 +73,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+                {{ __('Category') }}
+            </x-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
