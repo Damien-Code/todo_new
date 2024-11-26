@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('category', CategoryController::class)
-    ->only(['index', 'store', 'show', 'update', 'destroy'])
+    ->only(['index', 'store', 'show', 'update', 'destroy', 'edit'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('todo', TodoController::class)

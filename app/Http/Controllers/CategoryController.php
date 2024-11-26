@@ -57,7 +57,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', ['category' => $category]);
     }
 
     /**
@@ -65,7 +65,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validatedData = $request->validate([
+            'category' => 'required|max:48',
+            'color' => 'required'
+        ]);
+        $category->update($validatedData);
+        return redirect(route('category.index'));
     }
 
     /**

@@ -14,37 +14,40 @@
     </div>
     <div class="flex justify-center items-center flex-col p-24">
         @foreach($todos as $todo)
-            <div class="flex justify-between items-center w-96 h-16 p-4 mb-6 border-solid border-2 border-gray-400">
-                <form method="post" action="{{route('todo.updateTodo', $todo->id)}}">
-                    @method('PUT')
-                    @csrf
-                    <input type="checkbox" name="completed"
-                           onclick="event.preventDefault(); this.closest('form').submit();"
-                           @if($todo->completed) checked @endif value="{{old('completed', $todo->completed)}}">
-                </form>
-                <div class="flex justify-evenly w-36">
-                    @switch($todo->completed)
-                        @case('1')
-                            <p class="text-xl text-left line-through text-gray-300 overflow-y-scroll">{{$todo->task}}</p>
-                            @break
-                        @case('0')
-                            <p class="text-xl text-left overflow-y-scroll">{{$todo->task}}</p>
-                            @break
-                    @endswitch
-                    <form method="post" action="{{route('todo.destroy', $todo->id)}}">
+            <div class="flex items-center w-96 h-16 p-4 mb-6 border-solid border-2 border-gray-400">
+                <div class="flex justify-between">
+                    <form method="post" action="{{route('todo.updateTodo', $todo->id)}}">
+                        @method('PUT')
                         @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="category_id" value="{{ $category->id }}">
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                                 width="24px"
-                                 fill="black">
-                                <path
-                                    d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                            </svg>
-                        </button>
+                        <input type="checkbox" name="completed"
+                               onclick="event.preventDefault(); this.closest('form').submit();"
+                               @if($todo->completed) checked @endif value="{{old('completed', $todo->completed)}}">
                     </form>
+                    <div class="flex justify-evenly w-36">
+                        @switch($todo->completed)
+                            @case('1')
+                                <p class="text-xl text-left line-through text-gray-300 overflow-y-scroll">{{$todo->task}}</p>
+                                @break
+                            @case('0')
+                                <p class="text-xl text-left overflow-y-scroll">{{$todo->task}}</p>
+                                @break
+                        @endswitch
+                    </div>
+
                 </div>
+                <form method="post" action="{{route('todo.destroy', $todo->id)}}" class="ml-auto">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="category_id" value="{{ $category->id }}">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                             width="24px"
+                             fill="black">
+                            <path
+                                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
         @endforeach
 
