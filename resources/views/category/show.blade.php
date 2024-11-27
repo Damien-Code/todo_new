@@ -14,7 +14,7 @@
     </div>
     <div class="flex justify-center items-center flex-col p-24">
         @foreach($todos as $todo)
-            <div class="flex items-center w-96 h-16 p-4 mb-6 border-solid border-2 border-gray-400">
+            <div class="flex items-center w-96 h-16 p-4 mb-6 border-solid border-2 border-gray-400 rounded">
                 <div class="flex justify-between">
                     <form method="post" action="{{route('todo.updateTodo', $todo->id)}}">
                         @method('PUT')
