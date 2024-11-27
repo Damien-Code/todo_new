@@ -13,9 +13,9 @@
         </form>
     </div>
 
-    <div class="h-full w-screen grid grid-cols-3 justify-items-center gap-10">
+    <div class="h-full w-screen grid grid-cols-3 justify-items-center gap-10 pb-12">
         @foreach($categories as $category)
-            <div class=" flex w-96 h-48 p-12 rounded-lg text-center flex-col justify-between"
+            <div class=" flex w-96 p-12 rounded-lg text-center flex-col justify-between"
                  style="background-color: {{$category->color}};">
                 <div class="h-10">
                     <p class="text-4xl">{{$category->category}}</p>
