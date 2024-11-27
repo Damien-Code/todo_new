@@ -23,7 +23,7 @@
                                onclick="event.preventDefault(); this.closest('form').submit();"
                                @if($todo->completed) checked @endif value="{{old('completed', $todo->completed)}}">
                     </form>
-                    <div class="flex justify-evenly w-36">
+                    <div class="flex justify-evenly pl-4">
                         @switch($todo->completed)
                             @case('1')
                                 <p class="text-xl text-left line-through text-gray-300 overflow-y-scroll">{{$todo->task}}</p>
