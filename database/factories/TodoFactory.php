@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'category_id' => function () {
+                return Category::factory();
+            },
+            'task' => fake()->text(24)
         ];
     }
 }

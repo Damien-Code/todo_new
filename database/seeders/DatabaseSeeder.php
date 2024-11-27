@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
     {
 //         User::factory(10)->create();
         User::factory()
-            ->has(Category::factory(8))
-                ->has(Todo::factory(8))
+            ->has(Category::factory(8)
+                ->has(Todo::factory(8)))
             ->create([
                 'name' => 'Damiën',
                 'email' => 'dovandenijssel@live.nl',
             ]);
         User::factory(rand(1, 10))
-            ->has(Category::factory(12))
-                ->has(Todo::factory(8))
+            ->has(Category::factory(8)
+                ->has(Todo::factory(8)))
             ->create();
     }
 }
