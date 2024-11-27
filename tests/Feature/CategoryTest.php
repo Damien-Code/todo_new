@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -63,7 +64,17 @@ class CategoryTest extends TestCase
 
     public function test_can_create_category_with_todo()
     {
-        $category = Category::factory()->create();
-
+        $category = Category::factory()
+            ->has(Todo::factory(2))
+            ->create();
+        $data = [
+            'category' => 'test_category',
+            'color' => '#ffffff'
+        ];
+        $category->fill($data);
+        $category->save();
+        $this->assertEquals($data['category'], $category->category);
+        $this->assertEquals($data['color'], $category->color);
+        $this->assertCount(2, Todo::where('category_id', $category->id)->get());
     }
 }
