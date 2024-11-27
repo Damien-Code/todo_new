@@ -15,12 +15,12 @@
 
     <div class="h-full w-screen grid grid-cols-3 justify-items-center gap-10 pb-12">
         @foreach($categories as $category)
-            <div class=" flex w-96 p-12 rounded-lg text-center flex-col justify-between"
+            <div class=" flex w-96 h-64 p-10 rounded-lg text-center flex-col justify-between"
                  style="background-color: {{$category->color}};">
-                <div class="h-10">
+                <div class="overflow-y-scroll pb-4">
                     <p class="text-4xl">{{$category->category}}</p>
                 </div>
-                <div class="flex justify-between p-12">
+                <div class="flex justify-between">
                     <a href="{{route('category.show', $category->id)}}">
                         <button
                             class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
