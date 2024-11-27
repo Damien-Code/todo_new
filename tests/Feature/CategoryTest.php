@@ -37,4 +37,33 @@ class CategoryTest extends TestCase
         $this->assertEquals($data['category'], $category->category);
         $this->assertEquals($data['color'], $category->color);
     }
+
+    public function test_can_update_category(): void
+    {
+        $category = Category::factory()->create();
+        $data = [
+            'category' => 'test_category',
+            'color' => '#ffff00'
+        ];
+        //update categories
+        $category->fill($data);
+        $category->save();
+
+        //assert
+        $this->assertEquals($data['category'], $category->category);
+        $this->assertEquals($data['color'], $category->color);
+    }
+
+    public function test_can_delete_category(): void
+    {
+        $category = Category::factory()->create();
+        $category->delete();
+        $this->assertDatabaseMissing('categories', ['id' => $category->id]);
+    }
+
+    public function test_can_create_category_with_todo()
+    {
+        $category = Category::factory()->create();
+
+    }
 }
