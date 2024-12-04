@@ -40,6 +40,7 @@ class CategoryController extends Controller
             'category' => $request->get('category'),
             'color' => $request->get('color')
         ]);
+
         return redirect(route('category.index'));
     }
 

@@ -2,9 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
+use App\Models\Todo;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use function PHPUnit\Framework\isNull;
 
 class ProfileTest extends TestCase
 {
@@ -96,4 +99,21 @@ class ProfileTest extends TestCase
 
         $this->assertNotNull($user->fresh());
     }
+    public function test_can_delete_user_and_category_exists()
+    {
+        $user = User::factory()
+            ->has(Category::factory()->count(3))
+            ->create();
+        $dataUser = [
+            'name' => 'Damiën',
+            'email' => 'damien@gmail.com',
+        ];
+        $user->fill($dataUser);
+        $user->save();
+        $user->delete();
+        $this->assertDatabaseHas('categories', [
+            $user->categories->whereNotNull('user_id')->first()->id
+        ]);
+    }
+
 }

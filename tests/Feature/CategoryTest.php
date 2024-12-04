@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Todo;
+use http\Client\Curl\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -77,4 +78,5 @@ class CategoryTest extends TestCase
         $this->assertEquals($data['color'], $category->color);
         $this->assertCount(2, Todo::where('category_id', $category->id)->get());
     }
+
 }
