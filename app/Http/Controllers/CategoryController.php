@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\MockObject\CannotCloneTestDoubleForReadonlyClassException;
 
 class CategoryController extends Controller
 {
@@ -17,13 +18,21 @@ class CategoryController extends Controller
 
         // check if there is a search
         // if there is, check the search value with db
-        if(request()->has('search')){
-            $categories = $categories->where('category', 'like', '%'. request()->get('search', '').'%');
+        if(request()->has('search')) {
+            $search = request()->get('search');
+            $categories = Category::where('category', 'LIKE', '%' . $search . '%')->get();
         }
 //        $categories = auth()->user()->categories()->get();
         return view('category.index',
             ['categories' => $categories]);
     }
+
+//    public function search(Request $request)
+//    {
+//        $search = request()->get('search');
+//        $results = Category::where('category', 'like', '%'. $search .'%')->get();
+//        return view('category.index', ['results' => $results]);
+//    }
 
     /**
      * Show the form for creating a new resource.
