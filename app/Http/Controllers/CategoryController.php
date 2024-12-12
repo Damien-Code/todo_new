@@ -12,6 +12,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // check if there is a search
+        // if there is, check the search value with db
+        if(request()->has('search')){
+
+        }
         $userid = auth()->id();
         $categories = Category::where('user_id', $userid)->get();
 //        $categories = auth()->user()->categories()->get();
