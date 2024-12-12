@@ -12,15 +12,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $userid = auth()->id();
+        $categories = Category::where('user_id', $userid)->get();
+
         // check if there is a search
         // if there is, check the search value with db
         if(request()->has('search')){
-
+            $categories = $categories->where('category', 'like', '%'. request()->get('search', '').'%');
         }
-        $userid = auth()->id();
-        $categories = Category::where('user_id', $userid)->get();
 //        $categories = auth()->user()->categories()->get();
-        return view('category.index', compact('categories'));
+        return view('category.index',
+            ['categories' => $categories]);
     }
 
     /**
