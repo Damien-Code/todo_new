@@ -16,23 +16,16 @@ class CategoryController extends Controller
         $userid = auth()->id();
         $categories = Category::where('user_id', $userid)->get();
 
+        $totalCategories = count($categories);
         // check if there is a search
         // if there is, check the search value with db
         if(request()->has('search')) {
             $search = request()->get('search');
             $categories = Category::where('category', 'LIKE', '%' . $search . '%')->get();
         }
-//        $categories = auth()->user()->categories()->get();
-        return view('category.index',
-            ['categories' => $categories]);
-    }
 
-//    public function search(Request $request)
-//    {
-//        $search = request()->get('search');
-//        $results = Category::where('category', 'like', '%'. $search .'%')->get();
-//        return view('category.index', ['results' => $results]);
-//    }
+        return view('category.index', compact('categories', 'totalCategories'));
+    }
 
     /**
      * Show the form for creating a new resource.
