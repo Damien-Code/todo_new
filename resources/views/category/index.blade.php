@@ -21,6 +21,9 @@
         </form>
     </div>
 
+    @if(count($categories) < 1)
+        <p>No results found.</p>
+    @endif
     <div class="h-full w-screen grid grid-cols-3 justify-items-center gap-10 pb-12">
             @foreach($categories as $category)
                 <div class=" flex w-96 h-64 p-10 rounded-lg text-center flex-col justify-between"

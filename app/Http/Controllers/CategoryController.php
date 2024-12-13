@@ -16,13 +16,14 @@ class CategoryController extends Controller
         $userid = auth()->id();
         $categories = Category::where('user_id', $userid)->get();
 
-        $totalCategories = count($categories);
         // check if there is a search
         // if there is, check the search value with db
         if(request()->has('search')) {
             $search = request()->get('search');
-            $categories = Category::where('category', 'LIKE', '%' . $search . '%')->get();
+            $categories = Category::where('category', 'LIKE', '%' . $search . '%')->where('user_id', $userid)->get();
+//            Category::where('user_id', $userid)->get();
         }
+        $totalCategories = count($categories);
 
         return view('category.index', compact('categories', 'totalCategories'));
     }
